@@ -1,0 +1,159 @@
+﻿@model Real_Estate.Models.Ulica
+@{
+
+}
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#CityId").change(function () {
+                //console.log("usao u funkciju CityId");
+                var selectedCityId = $(this).val();
+                if (selectedCityId !== '') {
+                    $.ajax({
+                        url: '@Url.Action("GetOpstinaByGrad", "Nekretnine")',
+                        type: 'GET',
+                        data: { cityId: selectedCityId },
+                        success: function (data) {
+                            var opstineDropdown = $("#IdOpstine");
+                            opstineDropdown.empty();
+                            //console.log(data);
+                            $.each(data, function (index, item) {
+                                opstineDropdown.append($('<option/>', {
+                                    value: item.idOpstine,
+                                    text: item.nazivOpstine
+                                }));
+                            });
+                        }
+                    });
+                }
+                else {
+                    $("#IdOpstine").empty();
+                }
+            });
+            $("#IdOpstine").change(function () {
+                // console.log("usao u funkciju OpstinaId");
+                var selectedOpstinaId = $(this).val();
+                // console.log(selectedOpstinaId);
+                if (selectedOpstinaId !== '') {
+                    $.ajax({
+                        url: '@Url.Action("GetMikrolokacijaByOpstina", "Nekretnine")',
+                        type: 'GET',
+                        data: { opstinaId: selectedOpstinaId },
+                        success: function (data) {
+                            var mikrolokacijeDropdown = $("#IdMikrolokacije");
+                            mikrolokacijeDropdown.empty();
+                            //console.log(data);
+                            $.each(data, function (index, item) {
+                                mikrolokacijeDropdown.append($('<option/>', {
+                                    value: item.idMikrolokacije,
+                                    text: item.nazivMikrolokacije
+                                }));
+                            });
+                        }
+                    });
+                }
+                else {
+                    $("#IdMikrolokacije").empty();
+                }
+            });
+
+        });
+    </script>
+    }
+<style>
+    .nav-pills li a:hover {
+        background-color: blue;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="bg-dark col-auto col-md-2 min-vh-100 ">
+            <div class="bg-dark p-2">
+                <a class="d-flex text-decoration-none mt-5 align-items-center text-white">
+                    <span class="fs-4 d-none d-sm-inline">SideMenu</span>
+                </a>
+                <ul class="nav nav-pills flex-column mt-4">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Admin/PocetnaAdmin">
+                            Pocetna
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Admin/ProdateNekretnine">
+                            Prodate nekretnine
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Agencije">
+                            Agencije
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Mikrolokacije">
+                            Mikrolokacije
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Ulice">
+                            Ulice
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-9 main-content">
+                <form method="post" asp-action="DodajUlicu" asp-controller="Admin" enctype="multipart/form-data">
+                    <div class="form-group mb-2">
+                       @* <label class="control-label">Naziv Mikrolokacije</label>*@
+                        <div>
+                            <input class="form-control" type="text" asp-for="NazivUlice" name="NazivUlice" placeholder="Naziv Ulice" />
+                            <span asp-validation-for="NazivUlice" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="control-label">Grad</label>
+                        <div>
+                            <select class="form-select" id="CityId" name="CityId">
+                                <option value="None" selected>Izaberi Grad</option>
+                                @{
+                                    foreach (var grad in ViewBag.Gradovi)
+                                    {
+                                        <option value="@grad.IdGrada">@grad.NazivGrada</option>
+                                    }
+                                }
+                            </select>
+                            @*<span asp-validation-for="IdTipGrejanja" class="text-danger"></span>*@
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        @*<label class="control-label">Opstina</label>*@
+                        <div>
+                            <select class="form-select" id="IdOpstine" name="IdOpstine">
+                                <option value="None" selected>Izaberi Opstinu</option>
+                                <option></option>
+                            </select>
+                            @*<span asp-validation-for="IdTipGrejanja" class="text-danger"></span>*@
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        @*<label class="control-label">Mikrolokacija</label>*@
+                        <div>
+                            <select class="form-select" id="IdMikrolokacije" name="IdMikrolokacije">
+                                <option value="None" selected>Izaberi Mikrolokaciju</option>
+                                <option></option>
+                            </select>
+                            @*<span asp-validation-for="IdTipGrejanja" class="text-danger"></span>*@
+                        </div>
+                    </div>
+                    <div class="form-group text-center ">
+                        <br />
+                        <input type="submit" class="btn btn-primary btn-lg form-control" name="DodajUlicu" value="Nova Ulica" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

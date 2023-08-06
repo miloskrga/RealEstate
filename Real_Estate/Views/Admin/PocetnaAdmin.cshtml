@@ -1,0 +1,142 @@
+﻿@using Real_Estate.Models.Enums
+@model List<Korisnik>
+@{
+    var gradovi = ViewData["Gradovi"] as List<Grad>;
+}
+
+<style>
+    .nav-pills li a:hover{
+        background-color: blue;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="bg-dark col-auto col-md-2 min-vh-100 ">
+           <div class="bg-dark p-2">
+               <a class="d-flex text-decoration-none mt-5 align-items-center text-white">
+                   <span class="fs-4 d-none d-sm-inline">SideMenu</span>
+               </a>
+               <ul class="nav nav-pills flex-column mt-4">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Admin/PocetnaAdmin">
+                            Pocetna
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Admin/ProdateNekretnine">
+                            Prodate nekretnine
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Agencije">
+                            Agencije
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Mikrolokacije">
+                            Mikrolokacije
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Ulice">
+                            Ulice
+                        </a>
+                    </li>
+               </ul>
+           </div>
+        </div>
+        <div class="container">
+            <div class="col-md-9 main-content mt-5">
+                <form method="post" asp-action="PocetnaAdmin" asp-controller="Admin" enctype="multipart/form-data">
+                    <div class="row-cols-1 mb-5">
+                        <h2>Dobrodošli u Admin panel</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <div>
+                                    <select class="form-select" id="IdGrada" name="IdGrada">
+                                        <option value="None" selected>Izaberi Grad</option>
+                                        @{
+                                            foreach (var grad in gradovi)
+                                            {
+                                                <option value="@grad.IdGrada">@grad.NazivGrada</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 d-inline">                          
+                            <div>
+                                <select class="form-select" name="tipKorisnika" id="tipKorisnika">
+                                    <option value="None" selected>Izaberi Tip Korisnika</option>
+                                    <option value="Owner">Oglasivac</option>
+                                    <option value="Customer">Kupac</option>
+                                </select>                              
+                            </div>
+                        </div>
+                        <div class="col-sm-3 d-inline">
+                            <div class="form-group text-left">
+                                <input type="submit" class="btn btn-primary" name="PocetnaAdmin" value="Pretrazi..." />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="table-responsive mt-3">
+                    <table class="table table-bordered " style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Ime
+                                </th>
+                                 <th>
+                                    Prezime
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Telefon
+                                </th>
+                                <th>
+                                    Id Agencije
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                @foreach (var korisnik in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @korisnik.Ime
+                                        </td>
+                                        <td>
+                                            @korisnik.Prezime
+                                        </td>
+                                        <td>
+                                            @korisnik.Email
+                                        </td>
+                                        <td>
+                                            @korisnik.Telefon
+                                        </td>
+                                        <td>
+                                            @korisnik.IdAgencije
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+   

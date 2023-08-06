@@ -1,0 +1,271 @@
+﻿@model Real_Estate.Models.Nekretnine
+@{
+
+}
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#CityId").change(function () {
+                //console.log("usao u funkciju CityId");
+                var selectedCityId = $(this).val();
+                if (selectedCityId !== '') {
+                    $.ajax({
+                        url: '@Url.Action("GetOpstinaByGrad", "Nekretnine")',
+                        type: 'GET',
+                        data: { cityId: selectedCityId },
+                        success: function (data) {
+                            var opstineDropdown = $("#OpstinaId");
+                            opstineDropdown.empty();
+                            //console.log(data);
+                            $.each(data, function (index, item) {
+                                opstineDropdown.append($('<option/>', {
+                                    value: item.idOpstine,
+                                    text: item.nazivOpstine
+                                }));
+                            });
+                        }
+                    });
+                }
+                else {
+                    $("#OpstinaId").empty();
+                }
+            });
+            $("#OpstinaId").change(function () {
+               // console.log("usao u funkciju OpstinaId");
+                var selectedOpstinaId = $(this).val();
+               // console.log(selectedOpstinaId);
+                if (selectedOpstinaId !== '') {
+                    $.ajax({
+                        url: '@Url.Action("GetMikrolokacijaByOpstina", "Nekretnine")',
+                        type: 'GET',
+                        data: { opstinaId: selectedOpstinaId },
+                        success: function (data) {
+                            var mikrolokacijeDropdown = $("#MikrolokacijaId");
+                            mikrolokacijeDropdown.empty();
+                            //console.log(data);
+                            $.each(data, function (index, item) {
+                                mikrolokacijeDropdown.append($('<option/>', {
+                                    value: item.idMikrolokacije,
+                                    text: item.nazivMikrolokacije
+                                }));
+                            });
+                        }
+                    });
+                }
+                else {
+                    $("#MikrolokacijaId").empty();
+                }
+            });
+            $("#MikrolokacijaId").change(function () {
+                //console.log("usao u funkciju MikrolokacijaId");
+                var selectedMikrolokacijeId = $(this).val();
+                if (selectedMikrolokacijeId !== '') {
+                    $.ajax({
+                        url: '@Url.Action("GetUlicaByMikrolokacija", "Nekretnine")',
+                        type: 'GET',
+                        data: { mikrolokacijaId: selectedMikrolokacijeId },
+                        success: function (data) {
+                            var uliceDropdown = $("#UlicaId");
+                            uliceDropdown.empty();
+                           // console.log(data);
+                            $.each(data, function (index, item) {
+                                uliceDropdown.append($('<option/>', {
+                                    value: item.idUlice,
+                                    text: item.nazivUlice
+                                }));
+                            });
+                        }
+                    });
+                }
+                else {
+                    $("#UlicaId").empty();
+                }
+            });
+        });
+    </script>
+    }
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h3>Nova Nekretnina</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="NovaNekretnina" asp-controller="Nekretnine" enctype="multipart/form-data">
+                        <div class="form-group mb-2">
+                            <label class="control-label">Naziv</label>
+                            <div>
+                                <input class="form-control" type="text" asp-for="Naziv" name="Naziv" placeholder="Naziv" />
+                                <span asp-validation-for="Naziv" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Kvadratura</label>
+                            <div>
+                                <input class="form-control" type="text" asp-for="Kvadratura" name="Kvadratura" placeholder="Kvadratura" />
+                                <span asp-validation-for="Kvadratura" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Broj Soba</label>
+                            <div>
+                                <input class="form-control" type="text" asp-for="BrojSoba" name="BrojSoba" placeholder="BrojSoba" />
+                                <span asp-validation-for="BrojSoba" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Spratnost</label>
+                            <div>
+                                <input class="form-control" type="text" asp-for="Spratnost" name="Spratnost" placeholder="Spratnost" />
+                                <span asp-validation-for="Spratnost" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Ukupna Spratnost</label>
+                            <div>
+                                <input class="form-control" type="text" asp-for="UkupnaSpratnost" name="UkupnaSpratnost" placeholder="UkupnaSpratnost" />
+                                <span asp-validation-for="UkupnaSpratnost" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Cena</label>
+                            <div>
+                                <input class="form-control" type="text" asp-for="Cena" name="Cena" placeholder="Cena" />
+                                <span asp-validation-for="Cena" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Opis</label>
+                            <div>
+                                <input class="form-control" type="text" asp-for="Opis" name="Opis" placeholder="Opis" />
+                                <span asp-validation-for="Opis" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Saobracaj</label>
+                            <div>
+                                <input class="form-control" type="text" asp-for="Saobracaj" name="Saobracaj" placeholder="Saobracaj" />
+                                <span asp-validation-for="Saobracaj" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label">Prodato</label>
+                            <div>
+                                <input class="form-control" type="text" asp-for="Prodato" name="Prodato" placeholder="Prodato" />
+                                <span asp-validation-for="Prodato" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Tip Grejanja</label>
+                            <div>
+                                <select class="form-select" name="IdTipGrejanja">
+                                    <option value="None" selected>Izaberi Tip Grejanja</option>
+                                    <option value="Centralno">Centralno</option>
+                                    <option value="Struja">Struja</option>
+                                    <option value="Gas">Gas</option>
+                                    <option value="Podno">Podno</option>
+                                    <option value="TA_pec">TA pec</option>
+                                </select>
+                                <span asp-validation-for="IdTipGrejanja" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Tip Stanja</label>
+                            <div>
+                                <select class="form-select" name="IdTipGrejanja">
+                                    <option value="None" selected>Izaberi Tip Stanja</option>
+                                    <option value="Novo">Novo</option>
+                                    <option value="U_izgradnji">U izgradnji</option>
+                                    <option value="Renovirano">Renovirano</option>
+                                    <option value="Potrebno_renoviranje">Potrebno renoviranje</option>                                    
+                                </select>
+                                <span asp-validation-for="IdTipStanja" class="text-danger"></span>
+                            </div>                           
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Tip Nekretnine</label>
+                            <div>
+                                <select class="form-select" name="IdTipGrejanja">
+                                    <option value="None" selected>Izaberi Tip Nekretnine</option>
+                                    <option value="Kuca">Kuca</option>
+                                    <option value="Lokal">Lokal</option>
+                                    <option value="Magacin">Magacin</option>
+                                    <option value="Stan">Stan</option>
+                                    <option value="Vikendica">Vikendica</option>
+                                </select>
+                                <span asp-validation-for="IdTipNekretnine" class="text-danger"></span>
+                            </div>
+                        </div>
+                            <div class="form-group mb-2">
+                                <label class="control-label">Grad</label>
+                                <div>
+                                <select class="form-select" id="CityId" name="CityId">
+                                        <option value="None" selected>Izaberi Grad</option>
+                                        @{
+                                        foreach(var grad in ViewBag.Gradovi)
+                                        {
+                                            <option value="@grad.IdGrada">@grad.NazivGrada</option>
+                                        }
+                                    }
+                                    </select>
+                                    @*<span asp-validation-for="IdTipGrejanja" class="text-danger"></span>*@
+                                </div>
+                            </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Opstina</label>
+                            <div>
+                                <select class="form-select" id="OpstinaId" name="OpstinaId">
+                                   <option></option>
+                                </select>
+                                @*<span asp-validation-for="IdTipGrejanja" class="text-danger"></span>*@
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Mikrolokacija</label>
+                            <div>
+                                <select class="form-select" id="MikrolokacijaId" name="MikrolokacijaId">
+                                    <option></option>
+                                </select>
+                                @*<span asp-validation-for="IdTipGrejanja" class="text-danger"></span>*@
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Ulica</label>
+                            <div>
+                                <select class="form-select" id="UlicaId" name="UlicaId">
+                                    <option></option>
+                                </select>
+                                @*<span asp-validation-for="IdTipGrejanja" class="text-danger"></span>*@
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Slike</label>
+                            <div>
+                                <input type="file" name="images[]" id="images" multiple>
+                                <input type="submit" value="Upload">
+                            </div>
+                        </div>
+
+                       @* <form action="upload.php" method="post" >
+                            
+                        </form>*@
+                        
+                        <!-- Submit button -->
+                        <div class="form-group text-center ">
+                            <br />
+                            <input type="submit" class="btn btn-primary btn-lg form-control" name="NovaNekretnina" value="Nova Nekretnina" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

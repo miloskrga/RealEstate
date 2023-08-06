@@ -1,0 +1,176 @@
+﻿@model List<Mikrolokacija>
+@{
+    var gradovi = ViewData["Gradovi"] as List<Grad>;
+}
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#CityId").change(function () {               
+                var selectedCityId = $(this).val();
+                if (selectedCityId !== '') {
+                    $.ajax({
+                        url: '@Url.Action("GetOpstinaByGrad", "Nekretnine")',
+                        type: 'GET',
+                        data: { cityId: selectedCityId },
+                        success: function (data) {
+                            var opstineDropdown = $("#IdOpstine");
+                            opstineDropdown.empty();
+                            //console.log(data);
+                            $.each(data, function (index, item) {
+                                opstineDropdown.append($('<option/>', {
+                                    value: item.idOpstine,
+                                    text: item.nazivOpstine
+                                }));
+                            });
+                        }
+                    });
+                }
+                else {
+                    $("#IdOpstine").empty();
+                }
+            }); 
+            $('.delete-btn').click(function() {                                              
+                var idMikro = $(this).val();
+                console.log(idMikro);
+                $(this).closest('tr').remove();
+                $.ajax({
+                    url: '/Admin/BrisiMikrolokaciju',
+                    type: 'POST',
+                    data: { IdMikrolokacije: idMikro },
+                    success: function (result) {
+                        // Ovde možete obraditi odgovor sa serverske strane
+                    },
+                    error: function (xhr, status, error) {
+                        // Ovde možete obraditi grešku, ako se desi
+                    }
+                });
+            });
+        });
+    </script>
+    }
+
+
+<style>
+    .nav-pills li a:hover {
+        background-color: blue;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="bg-dark col-auto col-md-2 min-vh-100 ">
+            <div class="bg-dark p-2">
+                <a class="d-flex text-decoration-none mt-5 align-items-center text-white">
+                    <span class="fs-4 d-none d-sm-inline">SideMenu</span>
+                </a>
+                <ul class="nav nav-pills flex-column mt-4">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Admin/PocetnaAdmin">
+                            Pocetna
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Admin/ProdateNekretnine">
+                            Prodate nekretnine
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Agencije">
+                            Agencije
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Mikrolokacije">
+                            Mikrolokacije
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Ulice">
+                            Ulice
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-9 main-content mt-5">
+                <form method="post" asp-action="Mikrolokacije" asp-controller="Admin" enctype="multipart/form-data">                  
+                    <div class="row-cols-1 mb-5">
+                        <h1 class="mb-2">Mikrolokacije</h1>
+                    </div>
+                    <div class="row">                       
+                        <div class="col-sm-3">
+                            <div class="form-group">  
+                                <div>
+                                    <select class="form-select" id="CityId" name="CityId">
+                                        <option value="None" selected>Izaberi Grad</option>
+                                        @{
+                                            foreach (var grad in gradovi)
+                                            {
+                                                <option value="@grad.IdGrada">@grad.NazivGrada</option>
+                                            }
+                                        }
+                                    </select>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 d-inline">
+                            <div class="form-group mb-2">
+                                
+                                <div>
+                                    <select class="form-select" id="IdOpstine" name="IdOpstine">
+                                        <option value="None" selected>Izaberi Opstinu</option>
+                                        <option></option>
+                                    </select>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 d-inline">
+                            <div class="form-group text-left">
+                                <input type="submit" class="btn btn-primary" name="Mikrolokacije" value="Pretrazi..." />
+                            </div>
+                        </div>
+                        <div class="col-sm-3 d-inline">
+                            <div class="form-group text-center ">
+                                <a class="btn btn-outline-primary" href="/Admin/DodajMikrolokacije">
+                                    Dodaj Mikrolokaciju
+                                </a>
+                            </div>
+                        </div>
+                    </div>  
+                </form>
+                <div class="table-responsive mt-3">
+                    <table class="table table-bordered " style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Naziv Mikrolokacije
+                                </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(Model != null)
+                            {
+                                @foreach (var mikrolokacija in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @mikrolokacija.NazivMikrolokacije
+                                        </td>
+                                        <td>                                           
+                                            <button class="delete-btn" id="@mikrolokacija.IdMikrolokacije" name="BrisiMikrolokaciju" value="@mikrolokacija.IdMikrolokacije">Delete</button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,112 @@
+﻿@model Real_Estate.Models.Agencija
+@{
+
+}
+
+<style>
+    .nav-pills li a:hover {
+        background-color: blue;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="bg-dark col-auto col-md-2 min-vh-100 ">
+            <div class="bg-dark p-2">
+                <a class="d-flex text-decoration-none mt-5 align-items-center text-white">
+                    <span class="fs-4 d-none d-sm-inline">SideMenu</span>
+                </a>
+                <ul class="nav nav-pills flex-column mt-4">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Admin/PocetnaAdmin">
+                            Pocetna
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Admin/ProdateNekretnine">
+                            Prodate nekretnine
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Agencije">
+                            Agencije
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Mikrolokacije">
+                            Mikrolokacije
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Ulice">
+                            Ulice
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-9 main-content">
+                <div class="row-cols-1 mt-3 mb-5">
+                    <h1 class="mb-2">Uredi Agenciju</h1>
+                </div>
+
+                <form method="post" asp-action="UrediAgenciju" asp-controller="Admin" enctype="multipart/form-data">
+                    @{
+                        if (ViewBag.Poruka != null)
+                        {
+                            <p>@ViewBag.Poruka</p>
+                        }
+                    }
+                    <input class="form-control" type="hidden" asp-for="IdAgencije" value="@Model.IdAgencije" />
+                    <div class="form-group mb-2">
+                        @* <label class="control-label">Naziv Mikrolokacije</label>*@
+                        <div>
+                            <input class="form-control" type="text" asp-for="Naziv" name="Naziv" placeholder="Naziv Agencije" />
+                            <span asp-validation-for="Naziv" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        @* <label class="control-label">Naziv Mikrolokacije</label>*@
+                        <div>
+                            <input class="form-control" type="text" asp-for="PIB" name="PIB" placeholder="PIB" />
+                            <span asp-validation-for="PIB" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        @* <label class="control-label">Naziv Mikrolokacije</label>*@
+                        <div>
+                            <input class="form-control" type="text" asp-for="Adresa" name="Adresa" placeholder="Adresa" />
+                            <span asp-validation-for="Adresa" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        @* <label class="control-label">Naziv Mikrolokacije</label>*@
+                        <div>
+                            <input class="form-control" type="text" asp-for="Telefon" name="Telefon" placeholder="Telefon" />
+                            <span asp-validation-for="Telefon" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="control-label">Grad</label>
+                        <div>
+                            <select class="form-select" id="IdGrada" name="IdGrada">
+                                <option value="None" selected>Izaberi Grad</option>
+                                @{
+                                    foreach (var grad in ViewBag.Gradovi)
+                                    {
+                                        <option value="@grad.IdGrada">@grad.NazivGrada</option>
+                                    }
+                                }
+                            </select>
+                            <span asp-validation-for="IdGrada" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group text-center ">
+                        <br />
+                        <input type="submit" class="btn btn-primary btn-lg form-control" name="UrediAgenciju" value="Submit" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

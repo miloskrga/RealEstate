@@ -1,0 +1,195 @@
+﻿@using Real_Estate.Models.Enums
+@model List<Nekretnine>
+@{
+    var gradovi = ViewData["Gradovi"] as List<Grad>;
+}
+@section scripts {
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#CityId").change(function () {               
+            var selectedCityId = $(this).val();
+            if (selectedCityId !== '') {
+                $.ajax({
+                    url: '@Url.Action("GetOpstinaByGrad", "Nekretnine")',
+                    type: 'GET',
+                    data: { cityId: selectedCityId },
+                    success: function (data) {
+                        var opstineDropdown = $("#IdOpstine");
+                        opstineDropdown.empty();
+                        //console.log(data);
+                        $.each(data, function (index, item) {
+                            opstineDropdown.append($('<option/>', {
+                                value: item.idOpstine,
+                                text: item.nazivOpstine
+                            }));
+                        });
+                    }
+                });
+            }
+            else {
+                $("#IdOpstine").empty();
+            }
+        });
+    });
+</script>
+}
+
+
+<style>
+    .nav-pills li a:hover {
+        background-color: blue;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="bg-dark col-auto col-md-2 min-vh-100 ">
+            <div class="bg-dark p-2">
+                <a class="d-flex text-decoration-none mt-5 align-items-center text-white">
+                    <span class="fs-4 d-none d-sm-inline">SideMenu</span>
+                </a>
+                <ul class="nav nav-pills flex-column mt-4">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Admin/PocetnaAdmin">
+                            Pocetna
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Admin/ProdateNekretnine">
+                            Prodate nekretnine
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Agencije">
+                            Agencije
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Mikrolokacije">
+                            Mikrolokacije
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Ulice">
+                            Ulice
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-9 main-content mt-5">
+                <form method="post" asp-action="ProdateNekretnine" asp-controller="Admin" enctype="multipart/form-data">
+                    <div class="row-cols-1 mb-5">
+                        <h2>Prodate Nekretnine</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <div>
+                                    <select class="form-select" id="CityId" name="CityId">
+                                        <option value="None" selected>Izaberi Grad</option>
+                                        @{
+                                            foreach (var grad in gradovi)
+                                            {
+                                                <option value="@grad.IdGrada">@grad.NazivGrada</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 d-inline">
+                            <div class="form-group mb-2">
+                                <div>
+                                    <select class="form-select" id="IdOpstine" name="IdOpstine">
+                                        <option value="None" selected>Izaberi Opstinu</option>
+                                        <option></option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 d-inline">
+                            <div>
+                                <select class="form-select" name="tipStanja" id="tipStanja">
+                                    <option value="None" selected>Izaberi Tip Stanja</option>
+                                    <option value="Novo">Novo</option>
+                                    <option value="U_izgradnji">U izgradnji</option>
+                                    <option value="Renovirano">Renovirano</option>
+                                    <option value="Potrebno_renoviranje">Potrebno renoviranje</option>                                   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 d-inline">
+                            <div>
+                                <select class="form-select" name="tipNekretnine" id="tipNekretnine">
+                                    <option value="None" selected>Izaberi Tip Nekretnine</option>
+                                    <option value="Kuca">Kuca</option>
+                                    <option value="Lokal">Lokal</option>
+                                    <option value="Magacin">Magacin</option>
+                                    <option value="Stan">Stan</option>
+                                    <option value="Vikendica">Vikendica</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 d-inline">
+                            <div class="form-group text-left">
+                                <input type="submit" class="btn btn-primary" name="ProdateNekretnine" value="Pretrazi..." />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="table-responsive mt-3">
+                    <table class="table table-bordered " style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Naziv
+                                </th>
+                                <th>
+                                    Kvadratura
+                                </th>
+                                <th>
+                                    Broj Soba
+                                </th>
+                                <th>
+                                    Cena
+                                </th>
+                                <th>
+                                   Saobracaj
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                @foreach (var nekretnina in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @nekretnina.Naziv
+                                        </td>
+                                        <td>
+                                            @nekretnina.Kvadratura
+                                        </td>
+                                        <td>
+                                            @nekretnina.BrojSoba
+                                        </td>
+                                        <td>
+                                            @nekretnina.Cena
+                                        </td>
+                                        <td>
+                                            @nekretnina.Saobracaj
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
+

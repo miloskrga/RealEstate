@@ -1,0 +1,174 @@
+﻿@model List<Agencija>
+@{
+    var gradovi = ViewData["Gradovi"] as List<Grad>;
+}
+@section scripts {
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.delete-btn').click(function () {
+            //console.log("usao u funkciju CityId");
+            var idAgen = $(this).val();
+            console.log(idAgen);
+            $(this).closest('tr').remove();
+            $.ajax({
+                url: '/Admin/BrisiAgenciju',
+                type: 'POST',
+                data: { IdAgencije: idAgen },
+                success: function (result) {
+                    // Ovde možete obraditi odgovor sa serverske strane
+                },
+                error: function (xhr, status, error) {
+                    // Ovde možete obraditi grešku, ako se desi
+                }
+            });
+        });
+    });
+</script>
+}
+
+<style>
+    .nav-pills li a:hover {
+        background-color: blue;
+    }
+
+    .form-button-row {
+        display: flex;
+        align-items: center;
+    }
+
+    .form-button-row form {
+        margin-right: 10px;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="bg-dark col-auto col-md-2 min-vh-100 ">
+            <div class="bg-dark p-2">
+                <a class="d-flex text-decoration-none mt-5 align-items-center text-white">
+                    <span class="fs-4 d-none d-sm-inline">SideMenu</span>
+                </a>
+                <ul class="nav nav-pills flex-column mt-4">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Admin/PocetnaAdmin">
+                            Pocetna
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Admin/ProdateNekretnine">
+                            Prodate nekretnine
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Agencije">
+                            Agencije
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Mikrolokacije">
+                            Mikrolokacije
+                        </a>
+                    </li>
+                    <li class="nav-item py-2 py-sm-0">
+                        <a class="nav-link text-white" href="/Admin/Ulice">
+                            Ulice
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-9 main-content mt-5">
+                <form method="post" asp-action="Agencije" asp-controller="Admin" enctype="multipart/form-data">
+                    <div class="row-cols-1 mb-5">
+                        <h1 class="mb-2">Agencije</h1>
+                    </div>
+                    <div class="row">                       
+                        <div class="col-sm-3">
+                            <div class="form-group">  
+
+                                <div>
+                                    <select class="form-select" id="idGrada" name="idGrada">
+                                        <option value="None" selected>Izaberi Grad</option>
+                                        @{
+                                            foreach (var grad in gradovi)
+                                            {
+                                                <option value="@grad.IdGrada">@grad.NazivGrada</option>
+                                            }
+                                        }
+                                    </select>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 d-inline">
+                            <div class="form-group text-left">
+                                <input type="submit" class="btn btn-primary" name="Agencije" value="Pretrazi..." />
+                            </div>
+                        </div>
+                        <div class="col-sm-3 d-inline">
+                            <div class="form-group text-center ">
+                                <a class="btn btn-outline-primary" href="/Admin/DodajAgenciju">
+                                    Dodaj Agenciju
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="table-responsive mt-3">
+                    <table class="table table-bordered " style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Naziv Agencije
+                                </th>
+                                <th>
+                                    PIB
+                                </th>
+                                <th>
+                                    Adresa
+                                </th>
+                                <th>
+                                    Telefon
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                @foreach (var agencija in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @agencija.Naziv
+                                        </td>
+                                        <td>
+                                            @agencija.PIB
+                                        </td>
+                                        <td>
+                                            @agencija.Adresa
+                                        </td>
+                                        <td>
+                                            @agencija.Telefon
+                                        </td>
+                                        <td>
+                                            <div class="form-button-row">
+                                                <form method="get" asp-action="UrediAgenciju" asp-controller="Admin" enctype="multipart/form-data">
+                                                    <button class="edit-btn"  id="@agencija.IdAgencije" name="IdAgencije" value="@agencija.IdAgencije">Edit</button>                                                  
+                                                </form>
+                                                <button class="delete-btn" id="@agencija.IdAgencije" name="BrisiAgenciju" value="@agencija.IdAgencije">Delete</button>
+                                            </div>                                                                                                                                                      
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+

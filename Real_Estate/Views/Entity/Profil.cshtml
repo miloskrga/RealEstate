@@ -1,0 +1,80 @@
+﻿@using Real_Estate.Models.Enums
+
+@model Real_Estate.Models.Korisnik
+@{
+    ViewData["Title"] = "Profil";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mt-5">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h3>Profil</h3>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a asp-controller="Entity" asp-action="UrediProfil" class="btn btn-primary btn-sm">Izmeni</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @{
+                        if (ViewBag.Poruka != null)
+                        {
+                            <p>@ViewBag.Poruka</p>
+                        }
+                    }
+                    <div>
+                        <label class="control-label">Ime: </label>
+                        <label><b>@Model.Ime</b></label>
+                    </div>
+                    <div>
+                        <label class="control-label">Prezime: </label>
+                        <label><b>@Model.Prezime</b></label>
+                    </div>
+                     <div>
+                        <label class="control-label">Username: </label>
+                        <label><b>@Model.Username</b></label>
+                    </div>
+                    <div>
+                        <label class="control-label">Email: </label>
+                        <label><b>@Model.Email</b></label>
+                    </div>
+                    <div>
+                        <label class="control-label">Password: </label>
+                        <label><b>@Model.Password</b></label>
+                    </div>
+                    <div>
+                        <label class="control-label">Telefon: </label>
+                        <label><b>@Model.Telefon</b></label>
+                    </div>
+                    <div>
+                        <label class="control-label">Datum rodjenja: </label>
+                        <label><b>@Model.DatumRodjenja</b></label>
+                    </div>
+                    <div>
+                        <label class="control-label">Tip korisnika: </label>                       
+                        @if (Model.IdTipKorisnika == TipKorisnika.Owner)
+                        {
+                            <label><b>Oglasivac</b></label>
+                        }
+                        else if (Model.IdTipKorisnika == TipKorisnika.Customer)
+                        {
+                            <label><b>Kupac</b></label>
+                        }
+                    </div>
+                    <div>
+                        <label class="control-label">Agencija: </label>
+                        <label><b>@Model.IdAgencije</b></label>
+                    </div>
+                    <div>
+                        <label class="control-label">Grad: </label>
+                        <label><b>@Model.NazivGrada</b></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Real_Estate
+build_property.RootNamespace = Real_Estate
+build_property.ProjectDir = C:\Users\LENOVO\source\repos\Real_Estate\Real_Estate\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\LENOVO\source\repos\Real_Estate\Real_Estate
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Admin/Agencije.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWdlbmNpamUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Admin/DodajAgenciju.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRG9kYWpBZ2VuY2lqdS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Admin/DodajMikrolokacije.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRG9kYWpNaWtyb2xva2FjaWplLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Admin/DodajUlicu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRG9kYWpVbGljdS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Admin/Mikrolokacije.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWlrcm9sb2thY2lqZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Admin/PocetnaAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUG9jZXRuYUFkbWluLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Admin/ProdateNekretnine.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvZGF0ZU5la3JldG5pbmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Admin/Ulice.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVWxpY2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Admin/UrediAgenciju.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXJlZGlBZ2VuY2lqdS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Entity/LogIn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50aXR5XExvZ0luLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Entity/Profil.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50aXR5XFByb2ZpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Entity/Registracija.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50aXR5XFJlZ2lzdHJhY2lqYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Entity/UrediProfil.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50aXR5XFVyZWRpUHJvZmlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Nekretnine/IzmeniNekretninu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmVrcmV0bmluZVxJem1lbmlOZWtyZXRuaW51LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Nekretnine/NovaNekretnina.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmVrcmV0bmluZVxOb3ZhTmVrcmV0bmluYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Nekretnine/PocetnaProdavac.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmVrcmV0bmluZVxQb2NldG5hUHJvZGF2YWMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/LENOVO/source/repos/Real_Estate/Real_Estate/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-2v52nj5rc5

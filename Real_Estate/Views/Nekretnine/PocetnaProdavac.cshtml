@@ -1,0 +1,58 @@
+﻿@model List<Nekretnine>
+
+@{
+   
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mt-5">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h3>Lista Nekretnina</h3>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <a asp-controller="Nekretnine" asp-action="NovaNekretnina" class="btn btn-primary btn-sm">Nova Nekretnina</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered " style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Naziv
+                                    </th>
+                                    <th>
+                                        Cena
+                                    </th> 
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var nekretnina in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @nekretnina.Naziv
+                                        </td>
+                                        <td>
+                                            @nekretnina.Cena
+                                        </td>
+                                        <td>
+                                            <a asp-controller="Nekretnine" asp-action="IzmeniNekretninu" class="btn btn-primary btn-sm" asp-route-id="@nekretnina.IdNekretnine">Izmeni</a>
+                                            <a asp-controller="Nekretnine" asp-action="Prodato" class="btn btn-primary btn-sm" asp-route-id="@nekretnina.IdNekretnine">Prodato</a>
+                                           
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

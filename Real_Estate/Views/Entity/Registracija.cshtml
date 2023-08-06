@@ -1,0 +1,124 @@
+﻿@model Real_Estate.Models.Korisnik
+@{
+    ViewData["Title"] = "Create Korisnik";
+}
+
+<script>
+    function ShowInput() {
+        var selected = $("#IdTipKor").val();
+        if (selected == "Owner"){
+            $("#AgencijaId").show();
+            $("#AgencijaLab").show();
+            
+        }
+        else if (selected == "Customer" || selected == "None") {
+            $("#AgencijaId").hide();
+            $("#AgencijaLab").hide();
+        }
+    }
+</script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mt-5">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h3>Registration</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @{
+                        if(ViewBag.Poruka != null)
+                        {
+                            <p>@ViewBag.Poruka</p>
+                        }
+                    }
+                    <form method="post" asp-action="Registracija" asp-controller="Entity">
+                        <div class="form-group mb-2">
+                            <label class="control-label">Ime</label>
+                            <div>
+                                <input class="form-control" type="text" asp-for="Ime" name="Ime" placeholder="Ime"  />
+                                <span asp-validation-for="Ime" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Prezime</label>
+                            <div>
+                                <input class="form-control" type="text" asp-for="Prezime" name="Prezime" placeholder="Prezime"  />
+                                <span asp-validation-for="Prezime" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Username</label>
+                            <div>
+                                <input class="form-control" type="text" asp-for="Username" name="Username" placeholder="Username"  />
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Email</label>
+                            <div>
+                                <input class="form-control" type="email" asp-for="Email" name="Email" placeholder="Email"  />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Password</label>
+                            <div>
+                                <input class="form-control" type="password" asp-for="Password" name="Password" placeholder="Password"  />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Telefon</label>
+                            <div>
+                                <input class="form-control" type="text" asp-for="Telefon" name="Telefon" placeholder="Telefon"  />
+                                <span asp-validation-for="Telefon" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Datum Rodjenja</label>
+                            <div>
+                                <input class="form-control" type="date" asp-for="DatumRodjenja" name="DatumRodjenja" placeholder="DatumRodjenja"  />
+                                <span asp-validation-for="DatumRodjenja" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label">Tip Korisnika</label>
+                            <div>
+                                <select class="form-select" name="IdTipKorisnika" id="IdTipKor" onchange="ShowInput()">
+                                    <option value="None" selected>Izaberi Tip Korisnika</option>
+                                    <option value="Owner">Oglasivac</option>
+                                    <option value="Customer">Kupac</option>
+                                </select>
+                                <span asp-validation-for="IdTipKorisnika" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label" style="display:none;" id="AgencijaLab">Agencija</label>
+                            <div>
+                                <input class="form-control" type="text"  id="AgencijaId" style="display:none;" name="IdAgencije" placeholder="IdAgencije"/>                               
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label">Naziv Grada</label>
+                            <div>
+                                <input class="form-control" type="text" asp-for="NazivGrada" name="NazivGrada" placeholder="NazivGrada"  />
+                                <span asp-validation-for="NazivGrada" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group text-center ">
+                            <br />
+                            <input type="submit" class="btn btn-primary btn-lg form-control" name="registracija" value="Registracija" />
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
